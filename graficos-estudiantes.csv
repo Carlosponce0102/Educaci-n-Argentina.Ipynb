@@ -1,0 +1,86 @@
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line } from 'recharts';
+
+const GraficosEstudiantes = () => {
+  // Datos de ejemplo procesados (simulando el resultado del DataFrame)
+  const datosPromediosMaterias = [
+    { materia: 'Matemática', promedio: 7.2 },
+    { materia: 'Lengua', promedio: 7.8 },
+    { materia: 'Historia', promedio: 8.1 },
+    { materia: 'Geografía', promedio: 7.5 },
+    { materia: 'Biología', promedio: 7.9 },
+    { materia: 'Física', promedio: 6.8 },
+    { materia: 'Química', promedio: 7.0 },
+    { materia: 'Ed. Física', promedio: 8.5 },
+    { materia: 'Inglés', promedio: 7.6 },
+    { materia: 'Ed. Ciudadana', promedio: 8.2 }
+  ];
+
+  const datosEvolucionTrimestral = [
+    { trimestre: '1er Trimestre', promedio: 7.4 },
+    { trimestre: '2do Trimestre', promedio: 7.8 },
+    { trimestre: '3er Trimestre', promedio: 8.1 }
+  ];
+
+  const distribucionFaltas = [
+    { rango: '0-5', cantidad: 45 },
+    { rango: '6-10', cantidad: 35 },
+    { rango: '11-15', cantidad: 15 },
+    { rango: '16-20', cantidad: 5 }
+  ];
+
+  return (
+    <div className="space-y-8 w-full max-w-4xl p-4">
+      <Card>
+        <CardHeader>
+          <CardTitle>Promedio por Materia</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <BarChart width={700} height={300} data={datosPromediosMaterias}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="materia" angle={-45} textAnchor="end" height={100} />
+            <YAxis domain={[0, 10]} />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="promedio" fill="#8884d8" name="Promedio" />
+          </BarChart>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Evolución de Notas por Trimestre</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <LineChart width={700} height={300} data={datosEvolucionTrimestral}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="trimestre" />
+            <YAxis domain={[0, 10]} />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="promedio" stroke="#82ca9d" name="Promedio General" />
+          </LineChart>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Distribución de Faltas</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <BarChart width={700} height={300} data={distribucionFaltas}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="rango" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="cantidad" fill="#82ca9d" name="Cantidad de Estudiantes" />
+          </BarChart>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
+export default GraficosEstudiantes;
